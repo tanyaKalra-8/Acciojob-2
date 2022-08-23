@@ -1,0 +1,36 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+   static int ans;
+  
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+      ans=-1;
+      Scanner sc = new Scanner (System.in);
+      int n = sc.nextInt();
+      int x = sc.nextInt();
+      int arr[] = new int[n];
+      for(int i=0;i<n;i++){
+        arr[i]= sc.nextInt();
+      }
+      floor(arr,x,0,n-1);
+      System.out.println(ans);
+	}
+  static void floor(int[] arr, int x, int start,int end){
+    if(start>end){
+      return;
+    }
+    int mid=(start+end)/2;
+    if(arr[mid]<=x){
+      ans=mid;
+      floor(arr,x,mid+1,end);
+    }
+    else{
+      floor(arr,x,start,mid-1);
+    }
+  }
+}
