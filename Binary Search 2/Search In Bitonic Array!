@@ -1,0 +1,105 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+
+  
+  static int binarySearchInc(int arr[],int start,int end,int x){
+    // base case
+    if(start>end){
+      return -1;
+    }
+    int mid = (start+end)/2;
+    
+    if(arr[mid]==x){
+      return  mid;
+    }
+    if(arr[mid]>x){
+      return binarySearchInc(arr,start,mid-1,x);
+    }
+    else{
+      return binarySearchInc(arr,mid+1,end,x);
+    }
+  }
+
+
+  
+  static int binarySearchDec(int arr[],int start,int end,int x){
+    // base case
+    if(start>end){
+      return -1;
+    }
+    int mid = (start+end)/2;
+    
+    if(arr[mid]==x){
+      return mid;
+    }
+    if(arr[mid]<x){
+      // go left
+      return binarySearchDec(arr,start,mid-1,x);
+    }
+    else{
+      // go right
+      return binarySearchDec(arr,mid+1,end,x);
+    }
+  }
+
+
+    
+  static int findPeak(int[] arr, int start,int end){
+    // if only one element
+    if(start==end){
+      return start;
+    }
+    int mid = (start+end)/2;
+    if(mid==0 && arr[mid]>arr[mid+1]){
+      //this is the peak element
+      return mid;
+    }
+    if(mid==arr.length-1 && arr[mid]>arr[mid-1]){
+      return mid;
+    }
+    if(arr[mid]>arr[mid-1] && arr[mid]>arr[mid+1]){
+      // mid element is the peak element
+      return mid;
+    }
+    if(arr[mid]<arr[mid+1]){
+      // go right
+      return findPeak(arr,mid+1,end);
+    }
+    else{
+      // go left
+      return findPeak(arr,start,mid-1);
+    }
+  }
+
+    
+  
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	  //your code here
+      Scanner sc = new Scanner (System.in);
+      int n = sc.nextInt();
+      int []arr = new int[n];
+      for(int i=0;i<n;i++){
+        arr[i]=sc.nextInt();
+      }
+      int x = sc.nextInt();
+      
+      // calling a function
+      int peak = findPeak(arr,0,n-1); //returns the index of the peak element
+      // System.out.println(peak);
+
+      // apply binary search on left and right
+      int index;
+      index = binarySearchInc(arr,0,peak,x);
+      if(index != -1){
+        System.out.println(index);
+        return;
+      }
+      index = binarySearchDec(arr,peak+1,n-1,x);
+      System.out.println(index);
+	}
+}
