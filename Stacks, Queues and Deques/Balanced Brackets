@@ -1,0 +1,54 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+  public static boolean balancedBrackets(String s,int n){
+     Stack<Character> st = new Stack<>();
+      for(int i=0;i<n;i++){
+        char currChar = s.charAt(i);
+        if(currChar =='(' || currChar =='{' || currChar =='['){
+          st.push(currChar);
+        }
+        else{
+          if(st.isEmpty()){
+            return false;
+          }
+          if(currChar ==')' && st.peek() == '('){
+            st.pop();
+            continue;
+          }
+          if(currChar =='}' && st.peek() == '{'){
+            st.pop();
+            continue;
+          }
+          if(currChar ==']' && st.peek() == '['){
+            st.pop();
+            continue;
+          }
+          // when nothing matches
+          return false;
+        }
+      }
+     return st.isEmpty();
+  }
+ 
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+      Scanner sc = new Scanner (System.in);
+      int n = sc.nextInt();
+      String s = sc.next();
+      if(n==0){
+        System.out.println("NO");
+      }
+      boolean ans = balancedBrackets(s,n);
+     if(ans==true){
+       System.out.println("YES");
+     }
+      else{
+        System.out.println("NO");
+      }
+	}
+}
