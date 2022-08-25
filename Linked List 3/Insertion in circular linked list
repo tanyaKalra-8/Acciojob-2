@@ -1,0 +1,61 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// creating the class
+  class Node{
+    int data;
+    Node next;
+
+    Node(int data){
+      this.data=data;
+      this.next=null;
+    }
+  }
+
+public class Main
+{
+    static Node head;
+  static Node tail;
+
+// inserting data in nodes of linked list
+  static void insert(int data){
+    Node newNode = new Node(data);
+    if(head==null){
+      head=newNode;
+      tail=newNode;
+      newNode.next=head;
+      return;
+    }
+    else{
+     tail.next=newNode;
+     tail=newNode;
+     tail.next=head;
+    }
+  }
+
+// printing the circular linked list
+  static void print(){
+      Node currNode = head;
+    if(currNode==null){
+      return;
+    }
+     do{
+       System.out.print(currNode.data + " ");
+       currNode=currNode.next;
+     }while(currNode != head);
+  }   
+  
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+      Scanner sc = new Scanner (System.in);
+     int n = sc.nextInt();
+      for(int i=0;i<n;i++){
+        insert(sc.nextInt());
+      }
+      int k = sc.nextInt();
+      insert(k);
+      print();
+	}
+}
