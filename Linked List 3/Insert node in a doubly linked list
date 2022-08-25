@@ -1,0 +1,74 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// class created
+class Node{
+  int data;
+  Node next;
+  Node prev;
+
+  Node(int data){
+    this.data=data;
+    this.next=null;
+    this.prev=null;
+  }
+}
+
+public class Main
+{
+  static Node head;
+
+  // inserting data in node
+  static void insert(int data){
+    Node newNode = new Node(data);
+    if(head==null){
+      // prev=head;
+      head=newNode;
+      return;
+    }
+    Node currNode = head;
+    while(currNode.next != null){
+      currNode=currNode.next;
+    }
+    currNode.next=newNode;
+    newNode.prev=currNode;
+  }
+
+// inserting k at head
+  static void insertHead(int data){
+    Node newNode = new Node(data);
+    if(head==null){
+      // prev=head;
+      head=newNode;
+      return;
+    }
+    newNode.next=head;
+    head = newNode;
+  }
+
+// printing the list
+  static void print(){
+    if(head==null){
+      return;
+    }
+    Node currNode = head;
+    while(currNode != null){
+      System.out.print(currNode.data + " ");
+      currNode=currNode.next;
+    }
+  }
+
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+      Scanner sc = new Scanner (System.in);
+      int n= sc.nextInt();
+      int k = sc.nextInt();
+      for(int i=0;i<n;i++){
+        insert(sc.nextInt());
+      }
+      insertHead(k);
+      print();
+	}
+}
