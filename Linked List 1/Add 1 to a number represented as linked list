@@ -1,0 +1,59 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Node{
+  int data;
+  Node next;
+
+  Node(int data){
+    this.data=data;
+    this.next=null;
+  }
+}
+
+public class Main
+{
+  static Node head;
+
+  // printing the list
+  static void print(){
+    if(head==null){
+      System.out.print(1);
+      return;
+    }
+    Node currNode = head;
+    while(currNode != null){
+       System.out.print(currNode.data + " ");
+        currNode = currNode.next;
+    }
+  }
+  
+  // inserting at head
+  static void insert(int data){
+    Node newNode = new Node(data);
+    if(head==null){
+      head=newNode;
+      return;
+    }
+   newNode.next=head;
+    head=newNode;
+    return;
+  }
+  
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+        Scanner sc = new Scanner (System.in);
+      int h = sc.nextInt();  
+      int n= h+1;
+      for(int i = 0; i <9 ; i++){  
+        while(n!=0){
+          int data = n%10; 
+           n=n/10;
+          insert(data);
+        }
+      } 
+      print();
+	}
+}
