@@ -1,0 +1,81 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// Creating Node class
+ class Node{
+    int data;
+    Node next;
+
+    Node(int data){
+      this.data=data;
+      this.next = null;
+    }
+  }
+
+public class Main
+{
+    static Node head;
+
+  // inserting data at tail
+    static void insert(int data){
+      Node newNode = new Node(data);
+      if(head==null){
+        head=newNode;
+        return;
+      }
+      Node currNode = head;
+      while(currNode.next != null){
+        currNode = currNode.next;
+      }
+      currNode.next= newNode;
+    }
+
+  // printing output
+    static void print(){
+      if(head==null){
+        return;
+      }
+       Node currNode = head;
+        while(currNode !=null){
+            System.out.print(currNode.data + " " );
+            currNode = currNode.next;
+        }
+
+    }
+
+  // delete kth node
+    static void delete(int k){
+      if(head==null){
+        return;
+      }
+      if(k==0){
+        head=head.next;
+        return;
+      }
+      Node prev = null;
+      Node currN = head;
+      for(int i=0;i<k;i++){
+        prev = currN;
+        currN=currN.next;
+      }
+      prev.next=currN.next;
+    }
+
+  
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		//your code here
+      Scanner sc = new Scanner (System.in);
+      int n = sc.nextInt();
+      for(int i=0;i<n;i++){
+        int data = sc.nextInt();
+        insert(data);
+      }
+      
+      // taking position of the element to be deleted
+      int k = sc.nextInt();
+      delete(k);
+      print();
+	}
+}
