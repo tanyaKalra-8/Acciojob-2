@@ -1,0 +1,91 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+     static int searchStart(int[] arr, int start, int end,int b){
+        if(start>end){
+          return -1;
+        }
+
+       if(arr[start]==b){
+         return start;
+       }
+       
+        int mid = (start + end)/2;
+        if(arr[mid]==b){
+          if(mid==0 || arr[mid-1]==b){
+            // go left
+            return searchStart(arr,start,mid-1,b);
+          }
+          else{
+            return mid;
+          }
+        }
+        else if(arr[mid]< b){
+          // go right
+          return searchStart(arr,mid+1,end,b);
+        }
+        else if(arr[mid]>b){
+          // go left
+          return searchStart(arr,start,mid-1,b);
+        }
+         return -1;
+      }
+
+     static int searchEnd(int[] arr, int start, int end,int b){
+       if(start==arr.length-1 || (arr[start+1] != b)){
+         return start;
+       }
+      int mid=(start+end)/2;
+       if(arr[mid]==b){
+         if(arr[mid+1]==b){
+           // go right
+           return searchEnd(arr,mid+1,end,b);
+         }
+         else{
+           return mid;
+         }
+       }
+       else if(arr[mid]>b){
+         return searchEnd(arr,start,mid-1,b);
+       }
+       return -1;
+      }
+      
+	public static void main (String[] args) throws java.lang.Exception
+	{
+
+		//your code here
+      Scanner sc = new Scanner (System.in);
+      int n = sc.nextInt();
+      int[] arr = new int[n];
+      for(int i=0;i<n;i++){
+        arr[i]=sc.nextInt();
+      }
+      int b = sc.nextInt();
+
+// logic starts here
+      int s=-1;
+      int e=-1;
+      
+      if(n==1 && arr[0]==b){
+        s=0;
+        e=0;
+        System.out.print(s+ " " + e);
+        return;
+      }
+      
+         s=searchStart(arr,0,n-1,b);
+      
+          if(s != -1){
+            e=searchEnd(arr,s,n-1,b);
+          }
+          else{
+            e= -1;
+          }
+
+      System.out.print(s + " " + e);
+	}
+}
